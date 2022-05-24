@@ -6,6 +6,14 @@ import (
 	"os"
 )
 
+func Migrate(db *gorm.DB) {
+	err := db.AutoMigrate(&HexCounter{})
+
+	if err != nil {
+		panic("Migration Failed")
+	}
+}
+
 // GetDb connects to the database and returns the orm.
 func GetDb() *gorm.DB {
 	dsn, ok := os.LookupEnv("DSN")
