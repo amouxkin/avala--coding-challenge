@@ -1,5 +1,3 @@
-SHELL := /bin/zsh
-
 test:
 	go test ./...
 
