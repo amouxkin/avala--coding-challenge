@@ -1,6 +1,7 @@
 package main
 
 import (
+	"avala/common"
 	"avala/lcg"
 	"bufio"
 	"flag"
@@ -51,13 +52,19 @@ func main() {
 				break
 			}
 
+		GENERATE:
+
 			random := gen()
 
 			for {
-				if random > sampleSpace {
+				if random < sampleSpace {
 					break
 				}
 				random = gen()
+			}
+
+			if common.CheckIfOddLooking(random) {
+				goto GENERATE
 			}
 
 			if random == initialNumber {

@@ -3,6 +3,7 @@ module avala
 go 1.18
 
 require (
+	github.com/dlclark/regexp2 v1.4.0
 	github.com/joho/godotenv v1.4.0
 	github.com/stretchr/testify v1.7.0
 	gorm.io/driver/postgres v1.3.6
