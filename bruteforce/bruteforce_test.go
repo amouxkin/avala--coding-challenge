@@ -2,7 +2,6 @@ package bruteforce
 
 import (
 	"avala/common"
-	"fmt"
 	"gorm.io/gorm"
 	"math"
 	"sync"
@@ -38,11 +37,7 @@ func createBatch(offset int, wg *sync.WaitGroup, db *gorm.DB) {
 		}
 	}
 
-	tx := db.Begin()
-	tx.CreateInBatches(hexList, databaseBatch).
-		Commit()
-	fmt.Printf("Offset %v done\n", offset)
-
+	db.Begin().CreateInBatches(hexList, databaseBatch).Commit()
 	wg.Done()
 }
 
