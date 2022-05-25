@@ -78,7 +78,8 @@ func TestFindClosestSampleSpace(t *testing.T) {
 		{0xfff, 4_099},
 		{0xfff_fff, 16_777_259},
 		{0xf_fff_fff, 268_435_459},
-		// Takes a couple of minutes to calculate this.
+		// Takes a couple of minutes to calculate this. (The value is very close to the hexadecimal number required
+		// Just a difference of 16.)
 		{0xff_fff_fff, 4_294_967_311},
 	}
 

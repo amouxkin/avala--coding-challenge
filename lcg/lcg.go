@@ -23,6 +23,7 @@ func GeneralGenerator(previous, constant, seed, sampleSpace int) int {
 //	1.	If sampleSpace is not close to a prime or powers of prime, finding the initial number takes some time.
 //	2.	Due to the above mentioned limitation, numbers outside the sampleSpace (due to the prime/power of prime) must be recalculated.
 //		For which the gap will widen as the number of digits required increases.
+//	3.	Single threaded.
 func LehmerGenerator(previous, seed, sampleSpace int) func() int {
 	// Check if seed is prime
 	if !big.NewInt(int64(seed)).ProbablyPrime(0) {
