@@ -68,3 +68,21 @@ func TestLehmerGeneratorGuards(t *testing.T) {
 		})
 	}
 }
+
+func TestFindClosestSampleSpace(t *testing.T) {
+	tests := []struct {
+		num                int
+		closestSampleSpace int
+	}{
+		{10, 11},
+		{0xfff, 4_099},
+		{0xfff_fff, 16_777_259},
+		{0xf_fff_fff, 268_435_459},
+		// Takes a couple of minutes to calculate this.
+		{0xff_fff_fff, 4_294_967_311},
+	}
+
+	for _, test := range tests {
+		assert.Equal(t, lcg.FindClosestSampleSpace(test.num), test.closestSampleSpace)
+	}
+}

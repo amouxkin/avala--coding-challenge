@@ -19,6 +19,10 @@ func GeneralGenerator(previous, constant, seed, sampleSpace int) int {
 //		seed should be co-prime to sampleSpace
 //
 //		previous is an element of high multiplicative order
+//	Downside:
+//	1.	If sampleSpace is not close to a prime or powers of prime, finding the initial number takes some time.
+//	2.	Due to the above mentioned limitation, numbers outside the sampleSpace (due to the prime/power of prime) must be recalculated.
+//		For which the gap will widen as the number of digits required increases.
 func LehmerGenerator(previous, seed, sampleSpace int) func() int {
 	// Check if seed is prime
 	if !big.NewInt(int64(seed)).ProbablyPrime(0) {
@@ -54,4 +58,22 @@ func LehmerGenerator(previous, seed, sampleSpace int) func() int {
 		return internalPrevious
 	}
 
+}
+
+func FindClosestSampleSpace(num int) int {
+	for {
+		factors := make(map[int]struct{})
+
+		for i := 1; i < num; i++ {
+			if num%i == 0 {
+				factors[i] = struct{}{}
+			}
+		}
+
+		if len(factors) > 2 {
+			num++
+		} else {
+			return num
+		}
+	}
 }
