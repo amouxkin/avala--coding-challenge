@@ -32,6 +32,6 @@ func GetDb() *gorm.DB {
 }
 
 type HexCounter struct {
-	Hex   int `gorm:"primaryKey"`
+	Hex   int `gorm:"unique;default:0;not null"`
 	Count int `gorm:"not null;default:0"`
 }
